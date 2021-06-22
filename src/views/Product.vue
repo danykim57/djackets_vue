@@ -77,6 +77,7 @@ export default {
                 position: 'bottom-right',
             })
         }
+        //Add serializer
     }
 }
 </script>

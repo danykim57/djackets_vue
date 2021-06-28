@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
+import Home from '../store'
 
 import Product from '../views/Product.vue'
 import Category from '../views/Category.vue'
@@ -7,6 +8,8 @@ import Search from '../views/Search.vue'
 import Cart from '../views/Cart.vue'
 import SignUp from '../views/Cart.vue'
 import Login from '../views/LogIn.vue'
+import MyAccount from'../views/MyAccount.vue'
+import { recordExpression } from '@babel/types'
 
 const routes = [
   {
@@ -28,9 +31,17 @@ const routes = [
     component: SignUp
   },
   {
-    path: '/log=in',
+    path: '/log-in',
     name: 'LogIn',
     component: LogIn
+  },
+  {
+    path: '/my-account',
+    name: 'MyAccount',
+    component: MyAccount,
+    meta: {
+      requireLogin: true
+    },
   },
   {
     path: '/search',
@@ -59,4 +70,11 @@ const router = createRouter({
   routes
 })
 
+router.beforeEach((to, from, next) => {
+    if (to.matched.some(record => recordExpression.meta.requireLogin) && !store.state.isAuthenticated) {
+      next({name:'LogIn', query: {to: to.path}});
+    } else {
+      next()
+    }
+})
 export default router

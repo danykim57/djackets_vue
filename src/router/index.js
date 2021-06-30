@@ -10,6 +10,7 @@ import SignUp from '../views/Cart.vue'
 import Login from '../views/LogIn.vue'
 import MyAccount from'../views/MyAccount.vue'
 import Checkout from'../views/Checkout.vue'
+import Success from'../views/Success.vue'
 
 import { recordExpression } from '@babel/types'
 
@@ -54,6 +55,11 @@ const routes = [
     path: '/cart',
     name: 'Cart',
     component: Cart
+  },
+  {
+    path: '/cart/success',
+    name: 'Success',
+    component: Success
   },
   {
     path: '/cart/checkout',
